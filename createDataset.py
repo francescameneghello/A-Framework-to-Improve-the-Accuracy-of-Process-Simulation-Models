@@ -1,21 +1,29 @@
+'''
+Copyright 2021, ESTECO s.p.a 
+
+This file is part of A-Framework-to-Improve-the-Accuracy-of-Process-Simulation-Models.
+
+A-Framework-to-Improve-the-Accuracy-of-Process-Simulation-Models is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation version 3 of the License.
+
+A-Framework-to-Improve-the-Accuracy-of-Process-Simulation-Models is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with A-Framework-to-Improve-the-Accuracy-of-Process-Simulation-Models. 
+If not, see <https://www.gnu.org/licenses/>.
+
+This project was developed by Francesca Meneghello with the supervision of  
+Fabio Asnicar, Massimiliano de Leoni, Alessandro Turco, as part of the collaboration between ESTECO s.p.a and the University of Padua
+'''
+
 from pm4py.objects.log.importer.xes import importer as xes_importer
-from pm4py.objects.log.util import sorting
-from pm4py.objects.log.util import func
-
-from pm4py.algo.filtering.log.variants import variants_filter
-from pm4py.algo.filtering.log.attributes import attributes_filter
-
 from pm4py.algo.discovery.footprints import algorithm as footprints_discovery
-
-from pm4py.util import constants
 import pandas as pd
-import os
 
 class createDataset():
 
     def __init__(self, path_real, path_sim):
         try:
-            #self.costraints = pd.read_csv(path_costraints, sep=';')
             self.real=xes_importer.apply(path_real)
             self.sim=xes_importer.apply(path_sim)
             self.sizeReal=len(self.real)
@@ -68,12 +76,10 @@ class createDataset():
         sim=self.create_df(self.sim, self.sizeSim)
         sim["Log"]=[1]*self.sizeSim
         deleteAnd=self.delete_and()
-        #print(deleteAnd)
         real=real.drop(deleteAnd, axis=1)
         sim=sim.drop(deleteAnd, axis=1)
         self.write_csv(real, name1)
         self.write_csv(sim, name2)
-        print("Files csv generated")
         return real, sim
     
     def find_relation(self, task):
@@ -93,10 +99,6 @@ class createDataset():
             task2=intersection[i][1]
             delete_and.add(task1+'->'+task2)
         return list(delete_and)
-
-    def csv_to_xes(self):
-        from pm4py.objects.log.exporter.xes import exporter as xes_exporter
-        xes_exporter.apply(event_log, 'path')
 
 
     def write_csv(self, df, name):

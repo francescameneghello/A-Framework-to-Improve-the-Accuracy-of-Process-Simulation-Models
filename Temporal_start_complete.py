@@ -1,15 +1,24 @@
-from pm4py.objects.log.importer.xes import importer as xes_importer
-from pm4py.objects.log.util import sorting
-from pm4py.objects.log.util import func
+'''
+Copyright 2021, ESTECO s.p.a 
 
-from pm4py.util import constants
+This file is part of A-Framework-to-Improve-the-Accuracy-of-Process-Simulation-Models.
+
+A-Framework-to-Improve-the-Accuracy-of-Process-Simulation-Models is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation version 3 of the License.
+
+A-Framework-to-Improve-the-Accuracy-of-Process-Simulation-Models is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with A-Framework-to-Improve-the-Accuracy-of-Process-Simulation-Models. 
+If not, see <https://www.gnu.org/licenses/>.
+
+This project was developed by Francesca Meneghello with the supervision of  
+Fabio Asnicar, Massimiliano de Leoni, Alessandro Turco, as part of the collaboration between ESTECO s.p.a and the University of Padua
+'''
+
+from pm4py.objects.log.importer.xes import importer as xes_importer
 import pandas as pd
 
-from sklearn import tree 
-from sklearn.model_selection import train_test_split 
-from sklearn import metrics
-from matplotlib import pyplot as plt
-import numpy as np
 
 
 class time_start_complete():
